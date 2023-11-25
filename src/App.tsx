@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Directory } from "pages/Directory";
+import { Directory } from "pages/Directory/Directory";
 import { NotFound } from "pages/NotFound";
-import { UserDetails } from "pages/UserDetails";
+import { UserDetails } from "pages/UserDetails/UserDetails";
 
 function App() {
   return (

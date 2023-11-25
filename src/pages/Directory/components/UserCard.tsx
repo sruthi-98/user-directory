@@ -7,9 +7,9 @@ interface UserCardProps {
 
 export const UserCard = ({ posts, user }: UserCardProps) => {
   return (
-    <Link to={`/user/${user.id}`}>
-      <p>Name: {user.name}</p>
-      <p>Posts: {posts.length}</p>
+    <Link to={`/user/${user?.id}`}>
+      <p>Name: {user?.name}</p>
+      <p>Posts: {posts?.length}</p>
     </Link>
   );
 };
