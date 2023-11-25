@@ -37,7 +37,16 @@ export const SelectCountry = () => {
     }, 1000);
   };
 
+  const resetTimer = () => {
+    if (!timerRef.current) return;
+
+    clearInterval(timerRef.current as number);
+    timerRef.current = null;
+  };
+
   const pauseTimer = () => {
+    if (!timerRef.current) return;
+
     setTimerPaused(true);
     clearInterval(timerRef.current as number);
     timerRef.current = null;
@@ -52,7 +61,8 @@ export const SelectCountry = () => {
     if (!selectedCountry) return;
 
     // If current timer is running, remove timer
-    pauseTimer();
+    resetTimer();
+    setTime(null);
 
     fetchCountryTime(selectedCountry).then((data) => {
       const dateTime = new Date(
@@ -75,8 +85,9 @@ export const SelectCountry = () => {
   }, [selectedCountry]);
 
   return (
-    <div>
+    <div className="flex flex-wrap gap-5">
       <select
+        className="py-2 px-5 rounded-[5px] max-w-[250px] disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50"
         disabled={isCountryListLoading || isCountryListError}
         onChange={(event: ChangeEvent<HTMLSelectElement>) => {
           setSelectedCountry(event.target.value.toString());
@@ -89,7 +100,7 @@ export const SelectCountry = () => {
           </option>
         ))}
       </select>
-      <div>
+      <div className="bg-black text-white font-bold py-2 px-5 rounded-[5px]">
         {time === null ? (
           "00 : 00 : 00"
         ) : (
@@ -99,7 +110,13 @@ export const SelectCountry = () => {
           </>
         )}
       </div>
-      <button disabled={time === null} onClick={handleTimerOnClick}>
+      <button
+        className={`py-2 px-5 w-[130px] ${
+          timerPaused ? "bg-green-200" : "bg-yellow-200"
+        } rounded-[5px] disabled:cursor-not-allowed disabled:opacity-50`}
+        disabled={time === null}
+        onClick={handleTimerOnClick}
+      >
         {timerPaused ? "Start" : "Pause"} timer
       </button>
     </div>

@@ -19,13 +19,13 @@ export const Directory = () => {
 
   return (
     <div>
-      <h1>Directory</h1>
+      <h1 className="font-bold text-3xl text-center mb-5">Directory</h1>
       {isUserListLoading || isPostListLoading ? (
         <Loader />
       ) : isUserListError || isPostListError ? (
         <ErrorMessage message="An error has occured. Please try again." />
       ) : (
-        <div>
+        <div className="flex flex-col gap-5">
           {usersList.map((user: Record<string, any>) => (
             <UserCard
               key={user?.id}

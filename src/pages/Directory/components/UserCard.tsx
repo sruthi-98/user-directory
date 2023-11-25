@@ -8,8 +8,14 @@ interface UserCardProps {
 export const UserCard = ({ posts, user }: UserCardProps) => {
   return (
     <Link to={`/user/${user?.id}`}>
-      <p>Name: {user?.name}</p>
-      <p>Posts: {posts?.length}</p>
+      <aside className="flex justify-between p-5 border-2 rounded-[5px]">
+        <p>
+          <b>Name:</b> {user?.name}
+        </p>
+        <p>
+          <b>Posts:</b> {posts?.length}
+        </p>
+      </aside>
     </Link>
   );
 };

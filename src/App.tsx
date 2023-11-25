@@ -6,11 +6,13 @@ import { UserDetails } from "pages/UserDetails/UserDetails";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Directory />} />
-      <Route path="/user/:userId" element={<UserDetails />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <div className="p-5 mx-auto max-w-[1000px]">
+      <Routes>
+        <Route path="/" element={<Directory />} />
+        <Route path="/user/:userId" element={<UserDetails />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 }
 

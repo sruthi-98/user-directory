@@ -16,16 +16,20 @@ export const PostCardSection = () => {
     data: postList,
   } = useFetchData(() => fetchUserPosts(userId));
 
-  if (isPostLoading) return <Loader />;
-
-  if (isPostListError)
-    return <ErrorMessage message="Unable to fetch user posts" />;
-
   return (
-    <div>
-      {postList.map((post: Record<string, any>) => (
-        <PostCard key={post?.id} post={post} />
-      ))}
-    </div>
+    <>
+      <h1 className="font-bold text-3xl text-center mb-5">Posts</h1>
+      {isPostLoading ? (
+        <Loader />
+      ) : isPostListError ? (
+        <ErrorMessage message="Unable to fetch user posts" />
+      ) : (
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
+          {postList.map((post: Record<string, any>) => (
+            <PostCard key={post?.id} post={post} />
+          ))}
+        </div>
+      )}
+    </>
   );
 };

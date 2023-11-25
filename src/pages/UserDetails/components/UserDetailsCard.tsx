@@ -15,24 +15,38 @@ export const UserDetailsCard = () => {
     data: userDetails,
   } = useFetchData(() => fetchUserDetails(userId));
 
-  if (isUserDetailsLoading) return <Loader />;
-
-  if (isUserDetailsError)
-    return <ErrorMessage message="Unable to fetch user details" />;
-
   return (
-    <div>
-      <p>{userDetails?.name}</p>
-      <p>
-        {userDetails?.username} | {userDetails?.company?.catchPhrase}
-      </p>
-      <p>
-        {userDetails?.address?.suite}, {userDetails?.address?.street},{" "}
-        {userDetails?.address?.city}
-      </p>
-      <p>
-        {userDetails?.email} | {userDetails?.phone}
-      </p>
-    </div>
+    <>
+      <h1 className="font-bold text-3xl text-center mb-5">User details</h1>
+      {isUserDetailsLoading ? (
+        <Loader />
+      ) : isUserDetailsError ? (
+        <ErrorMessage message="Unable to fetch user details" />
+      ) : (
+        <aside className="flex justify-between gap-1 flex-wrap p-5 border-2 rounded-[5px] mb-10">
+          <section>
+            <p className="font-bold">{userDetails?.name}</p>
+            <p className="text-slate-700">
+              {userDetails?.username} | {userDetails?.company?.catchPhrase}
+            </p>
+          </section>
+          <section>
+            <p className="italic">
+              {userDetails?.address?.suite}, {userDetails?.address?.street},{" "}
+              {userDetails?.address?.city}
+            </p>
+            <p>
+              <span className="text-blue-800 font-semibold">
+                {userDetails?.email}
+              </span>{" "}
+              |{" "}
+              <span className="text-slate-800 font-semibold">
+                {userDetails?.phone}
+              </span>
+            </p>
+          </section>
+        </aside>
+      )}
+    </>
   );
 };
